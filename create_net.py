@@ -42,7 +42,7 @@ def define_net(classes_count):
     net.add(Dense(classes_count, activation='softmax'))
 
     # defining gradient descent optimizer
-    sgd_optimizer = SGD(momentum=0.8, decay=(0.01 / 25))  # momentum=0.9
+    sgd_optimizer = SGD(momentum=0.9, decay=(0.01 / 25))  # momentum=0.9
 
     # compiling model
     net.compile(optimizer=sgd_optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
@@ -51,7 +51,7 @@ def define_net(classes_count):
 
 
 def train_net(net, train_x, train_y, test_x, test_y):
-    net.fit(train_x, train_y, batch_size=32, epochs=10, verbose='auto', validation_data=(test_x, test_y))
+    net.fit(train_x, train_y, batch_size=32, epochs=15, verbose='auto', validation_data=(test_x, test_y))
     _, accuracy = net.evaluate(test_x, test_y, batch_size=32)
     name = "net_model_{accuracy:f}.h5".format(accuracy=accuracy)
     net.save(name)
